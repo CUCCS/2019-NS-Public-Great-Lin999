@@ -167,13 +167,16 @@
   * 靶机可以直接访问攻击者主机&攻击者主机无法直接访问靶机&网关可以直接访问攻击者主机和靶机
   <font color="red">
     * 虚拟机中的NatNetWork网卡是一块普通的网卡，而nat服务的提供是由网关提供。对于Debian-GateWay和Kali-Attacker来说，他们的nat服务是由客机提供。而对于所有的靶机来说，老师所提供的Debian-GateWay的配置中有配置nat服务。  
-    查看网关的配置，有设置nat服务
+    查看网关的配置，有设置nat服务   
+
     ```
     # sudo vi /etc/network/interfaces
     # iptables-save
-    ```
+    ```   
+
     ![](./img/GateWay-Network.png)
     ![](./img/Debian-iptables.png)
+
     
     * ping通这个过程包含了两个包：ICMP Echo Request和ICMP Echo Reply，经历四个过程：源主机向目标主机发送request后，目标主机收到request包，目标主机发送一个对应的reply包，源主机接收到对应的reply包，这四个过程中任意一个过程出现了错误都会被显示为ping不通。
 
