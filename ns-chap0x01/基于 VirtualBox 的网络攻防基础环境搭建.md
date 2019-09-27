@@ -164,25 +164,6 @@
 
       从上图可以看出，网关所抓取的包含了以上的所有的过程，所以可以证明靶机的所有对外上下行流量必须经过网关   
       
-  ## 重新修改内容 
-  ***
-  * 靶机可以直接访问攻击者主机&攻击者主机无法直接访问靶机&网关可以直接访问攻击者主机和靶机
-  
-    * 虚拟机中的NatNetWork网卡是一块普通的网卡，而nat服务的提供是由网关提供。对于Debian-GateWay和Kali-Attacker来说，他们的nat服务是由客机提供。而对于所有的靶机来说，老师所提供的Debian-GateWay的配置中有配置nat服务。  
-    查看网关的配置，有设置nat服务，```sudo vi /etc/network/interfaces```,```iptables-save```   
-
-    ![](./img/GateWay-Network.png)
-    ![](./img/Debian-iptables.png)
-
-    
-    * ping通这个过程包含了两个包：ICMP Echo Request和ICMP Echo Reply，经历四个过程：源主机向目标主机发送request后，目标主机收到request包，目标主机发送一个对应的reply包，源主机接收到对应的reply包，这四个过程中任意一个过程出现了错误都会被显示为ping不通。
-
-    * 宿主机提供的Nat服务只在虚拟机访问互联网时生效。当不涉及到互联网时，Debian-GateWay和Kali-Attacker的两块网卡就是处于同一子网下的普通网卡，这两台机器处于同一子网，所以Debian-GateWay和Kali-Attacker理所当然是可以相互访问的。同理，Debian-GateWay和所有的靶机也是处于同一片子网（intnet1和intnet2）中，所以网关和所有靶机也是可以相互访问的。   
-    
-    * Nat的作用是将内网的IP映射为本机外网IP+端口，靶机所发送的request包在经过网关后，经过nat服务，request包的源IP地址被改为网关自己的外网所对应的IP地址+端口号，然后被发送给攻击者，所以在攻击者看来是网关在与自己通信。而攻击者发送的reply的包在到达网关时，网关会根据对应的端口再把这个包传给靶机。所以在靶机看来就是“靶机能ping通攻击者”。   
-
-    * 攻击者ping不通靶机是因为他的request包是无法根据目标的IP地址到达靶机的。
-
 
 ## 实验问题
   * 安装的Kali-attacker上不了网
