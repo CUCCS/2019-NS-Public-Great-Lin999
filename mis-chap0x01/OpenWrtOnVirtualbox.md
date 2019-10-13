@@ -4,7 +4,7 @@
   * [x] 能够通过LuCi 这个网页形式的管理界面
   * [x] 网卡驱动安装成功
   * [x] LuCi 这个网页能够显示wireless
-  * [ ] 能够扫描到wireless
+  * [X] 能够扫描到wireless
 
 
 ## 实验步骤
@@ -72,6 +72,9 @@
   ```opkg install wpa-supplicant hostapd ```     
   应用后重新进入编辑->wireless security
     ![](./img/wirelesssecurity.png)  
+  5. 出现wifi
+  ![](./img/wifi.png)
+
   
 ## 实验结论
   * 最后的结果应该是可以扫描到LZQOpenWrt的Wifi，其本质就是virtualbox中的OpenWrt借助无线网卡硬件设备开启无线网络，提供无线网卡的虚拟化仿真功能。
@@ -102,6 +105,18 @@
     6. 重新安装18.06.4后成功
     ![](./img/driverok.png)
     ![](./img/wireless.png)
+
+  * wifi扫描不到
+  1. 更改配置
+  band改为2.4，channel改为10,注意点开enable
+  2. 重新启动wlan0
+  ``` 
+  ifconfig wlan0 down
+  ifconfig
+  ifconfig -a
+  ifconfig wlan0 up
+  ```
+  或者等一会
 
 ## 参考文献
    * [kmod-ath9k- openwrt](https://openwrt.org/packages/pkgdata_lede17_1/kmod-ath9k-htc)
