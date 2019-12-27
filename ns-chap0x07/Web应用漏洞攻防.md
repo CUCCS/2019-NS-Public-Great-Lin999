@@ -21,7 +21,8 @@
 
 ## 实验步骤
 
-* 搭建WebGoat实验环境
+* 启动WebGoat实验环境
+>使用“启动”这一词是因为这些环境其实已经在docker这个容器中，我们只需用命令启动这个环境
   1. 下载 
   ```bash
   apt update && apt install docker-compose       
@@ -52,7 +53,7 @@
   6. WebGoat7.1版本登陆成功                       
   ![](./img/ok.png)                  
 
-* 搭建Juice Shop实验环境
+* 启动Juice Shop实验环境
   1. 安装
   ```bash
   cd docker/ctf-games/owasp/juice-shop
